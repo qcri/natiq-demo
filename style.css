@@ -1,0 +1,25 @@
+body {
+    /* background-image: url("images/bg1.jpg"); */
+    background-repeat:repeat-y;
+    background-size: cover;
+   }
+
+.content{
+    padding: 20%;
+    width:100%;
+    
+}
+
+.speaker-btn{
+  background-image: url('images/speaker.png');
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-size: 100%;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.speaker-btn:hover{
+    cursor: hand;
+}
