@@ -23,81 +23,46 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
       rel="stylesheet"
     />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet" />
-    <title>Hello, world!</title>
+    <title>Dicritization - Natiq demo</title>
   </head>
-  <body>
-    <header>
-      <!-- Navbar -->
-      <div>
-        <a href=""><img src="images/farasa-logo.png" alt="farasa logo" /></a>
+  <body> 
+
+
+ <div class="relative min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center"
+	style="background-image: url(https://images.unsplash.com/photo-1525302220185-c387a117886e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);">
+
+  <div class="header">
+    <a href="https://farasa.qcri.org/" target="_blank"><img src="images/Farasa2-svg.png" alt="farasa logo" /></a>
+    <a href="https://tts.qcri.org/" target="_blank"><img src="images/natiq.png" alt="Natiq logo" /></a>
+  </div>  
+  
+  <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+	<div class="max-w-7xl w-full space-y-8 p-12 bg-white rounded-xl z-10">
+		<div class="text-center">
+			<h2 class="mt-6 text-3xl font-bold text-gray-900">
+				Welcome To Dicritization and Natiq demo!
+			</h2>
+		</div>
+		<form class="mt-8 space-y-6" action="#" method="POST">
+			<input type="hidden" name="remember" value="true">
+			<div class="relative">
+				<label class="text-sm font-bold text-gray-700 tracking-wide">Enter text to dicritize</label>
+				<textarea id="plainText" class=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 rtl" type="">  ستبقى القدس عاصمة فلسطين العربية </textarea>
       </div>
-      <!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
-          <div class="container-fluid">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-mdb-toggle="collapse"
-              data-mdb-target="#navbarExample01"
-              aria-controls="navbarExample01"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i class="fas fa-bars"></i>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarExample01">
-                <img
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">About</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav> -->
-      <!-- Navbar -->
-
-      <!-- Jumbotron -->
-      <!-- <div class="p-5 text-center bg-light">
-          <h1 class="mb-3">Heading</h1>
-          <h4 class="mb-3">Subheading</h4>
-          <a class="btn btn-primary" href="" role="button">Call to action</a>
-        </div> -->
-      <!-- Jumbotron -->
-    </header>
-    <div class="content">
-      <form>
-        <div class="form-group">
-          <label for="plainText">Enter the text you want to diacritize </label>
-          <textarea
-            type="text"
-            class="form-control"
-            id="plainText"
-            placeholder="ادخل النص المراد تشكيله"
-          >
-و ستبقى دائما و أبدا القدس عاصمة فلسطين الأبدية</textarea
-          >
-        </div>
-
-        <button type="submit" id="diacritize_btn" class="btn btn-primary">
-          diacritize
+			<div>
+				<button id="diacritize_btn" type="submit" class="w-60 center flex justify-center bg-indigo-500 text-gray-100 p-4  rounded-full tracking-wide
+                                font-semibold  focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300">
+            Dicritize
         </button>
-        <!-- <button value="speak" class="speaker-btn"></button> -->
-      </form>
-      <div id="diacritized-results"></div>
-      <div class="test"></div>
-    </div>
-
+			</div>
+        <div id="result-title"></div>
+        <div id="diacritized-results">
+        </div>
+		</form>
+	</div>
+</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
