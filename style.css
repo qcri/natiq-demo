@@ -1,5 +1,5 @@
-.speaker-btn{
-  background-image: url('images/speaker-icon-9.png');
+.speaker-btn {
+  background-image: url("images/speaker-icon-9.png");
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
@@ -10,66 +10,186 @@
   margin-right: 28px;
   margin-top: -51px;
 }
- 
-.speaker-btn:hover{
-    cursor: hand;
+
+.speaker-btn:hover {
+  cursor: hand;
 }
 
-.rtl{
-    direction: rtl;
-    text-align: right
-    
+.rtl {
+  direction: rtl;
+  text-align: right;
 }
 
-.center{
-    text-align: center;
-    margin: -0 auto;
+.center {
+  text-align: center !important;
+  margin: 0 auto;
 }
-.processed-result{
-    direction: rtl;
-    text-align: right
+.processed-result {
+  direction: rtl;
+  text-align: right;
 }
-.margin-tb{
-    margin-top: .225rem ;
-    margin-bottom: .225rem;
+.margin-tb {
+  margin-top: 0.225rem;
+  margin-bottom: 0.225rem;
 }
-.loading{
-    display: inline-block;
-    background-image: url('images/loading.gif');
-    background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
-    background-size: 100%;
+.loading {
+  display: inline-block;
+  background-image: url("images/loading.gif");
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  background-size: 100%;
 
-    text-align: center;
-    margin: 0 auto;
-}
-
-.hidden{
-    display: none;
+  text-align: center;
+  margin: 0 auto;
 }
 
-.header{
-    padding-top:10em;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 70px;
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+.hidden {
+  display: none;
 }
 
+.header {
+  padding-top: 7em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 117px;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
 
-.header img{
-    height: 70px;
-
+.header img {
+  height: 117px;
 }
 .header a:first-child {
   margin-right: 3em;
+}
+.page1 {
+  margin-top: 3em;
+  min-height: 69vh;
+}
+.box-dimen {
+  min-height: 367px;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 0.35rem;
+  padding: 19px;
+}
 
+.box-border {
+  border: 1px solid #ccc;
+  border-radius: 0.35rem;
+  padding: 19px;
+}
+.big-font {
+  font-size: 1.3rem;
+}
+.splitted-text {
+  height: auto;
+}
+.hint {
+    margin-bottom: 12px;
+  }
+  .top-margin {
+    margin-top: 67px;
+  }
+  .warning{
+      border-color: red;
+  }
+  .disabled{
+      background-color:grey;
+  }
+  .disabled:hover{
+    background-color:grey;
+  }
+  .disabled:hover, .disable-speaker:hover{
+    cursor:not-allowed;
+    
+}
+
+@media screen and (max-width: 700px) {
+  .header {
+    padding-top: 3em;
+    height: 40px;
+  }
+  .header img {
+    height: 40px;
+  }
+  .page1 {
+    margin-top: 2em;
+  }
+  .p-12 {
+    padding: 1rem;
+  }
+
+
+  #diacritize_btn,
+  #split-btn,
+  .previous {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    text-align: center !important;
+    width: 8rem;
+  }
+
+  .w-1\/2 {
+    width: 38%;
+  }
+  .px-4 {
+  
+    padding-left: 0.5rem!important;
+    }
+    .speaker-btn {
+        margin-top: -13px;
+    }
+    .big-row{
+        flex-wrap: wrap;
+        flex-flow: column-reverse;
+    }
+}
+
+/**************************************/
+[x-cloak] {
+  display: none;
+}
+ 
+.form-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  flex-shrink: 0;
+  color: currentColor;
+  background-color: #fff;
+  border-color: #e2e8f0;
+  border-width: 1px;
+  height: 1.4em;
+  width: 1.4em;
+}
+
+ 
+.form-radio {
+  border-radius: 50%;
+}
+
+.form-radio:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+  border-color: transparent;
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
