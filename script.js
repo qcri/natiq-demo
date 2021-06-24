@@ -54,13 +54,28 @@ $("document").ready(function () {
 
 
   $("#splitted-diacritized-results").on("click", ".speaker-btn", function (e) {
-    if (!$(this).hasClass("disable-speaker")) {
-      let current = $(this);
+    
+    // if (!$(this).hasClass("disable-speaker")) {
+    //   let current = $(this);
+    //   e.preventDefault();
+    //   let text = $(this).prev().val();
+    //   if(text != "")
+    //     jobId = submitTTSJob(text, current);
+    // }
+
       e.preventDefault();
-      let text = $(this).prev().val();
-      if(text != "")
-        jobId = submitTTSJob(text, current);
-    }
+      let current = $(this);
+      let text = $(".splitted-text").val();
+      // alert(text)
+      if(text != ""){
+        arrayOfText = text.split("\n");
+        for(line of arrayOfText)
+          // console.log(line)  
+          jobId = submitTTSJob(line, current);
+      }
+
+   
+
   });
 
   function delay(t, v) {
@@ -130,29 +145,37 @@ $("document").ready(function () {
   }
 
   function exposeSplittedResult(resultsList) {
-    let result =  "";
-    let warningClass = "";
-    let disableSpeaker = "";
-    let warning = "The length of this text exceeds 20 words."
-    for (const text of resultsList) {
-      trimmedText = text.trim();
-      if(trimmedText != "." && trimmedText != "،"){
-        if(countWords(trimmedText) > 20 ){
-          warningClass = "warning";
-          disableSpeaker= "disable-speaker"
-        }
-        result +=
-          '<div class="processed-result" title="' + warning + '">' +
-          '<textarea class="splitted-text w-10/12 text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 big-font box-border '+ warningClass +'" >' +
-          trimmedText +
-          "</textarea>" +
-          '<button value="speak" class="speaker-btn ' + disableSpeaker + '"></button>' +
-          '<div class="center hidden loading-wrapper">  <span class="loading"></span></div>' +
-          "</div>";
-      }
-
-    }
-
+    // let result =  "";
+    // let warningClass = "";
+    // let disableSpeaker = "";
+    // let warning = "The length of this text exceeds 20 words."
+    // for (const text of resultsList) {
+    //   trimmedText = text.trim();
+    //   if(trimmedText != "." && trimmedText != "،"){
+    //     if(countWords(trimmedText) > 20 ){
+    //       warningClass = "warning";
+    //       disableSpeaker= "disable-speaker"
+    //     }
+    //     result +=
+    //       '<div class="processed-result" title="' + warning + '">' +
+    //       '<textarea class="splitted-text w-10/12 text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 big-font box-border '+ warningClass +'" >' +
+    //       trimmedText +
+    //       "</textarea>" +
+    //       '<button value="speak" class="speaker-btn ' + disableSpeaker + '"></button>' +
+    //       '<div class="center hidden loading-wrapper">  <span class="loading"></span></div>' +
+    //       "</div>";
+    //   }
+    // console.log(resultsList)
+    text = resultsList.join('\n')
+    let result =
+      '<div class="processed-result">' +
+      '<textarea class="splitted-text w-10/12 text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 big-font box-border" >' +
+      text +
+      "</textarea>" +
+      '<button value="speak" class="speaker-btn"></button>' +
+      '<div class="center hidden loading-wrapper">  <span class="loading"></span></div>' +
+      "</div>";
+  
     $("#splitted-diacritized-results").html(result);
   }
 
@@ -199,6 +222,7 @@ $("document").ready(function () {
         promise1 = new Promise(async (resolve, reject) => {
           res = await checkStatus(result.job_id, current);
           if (res == result.job_id) {
+            console.log(res)
             resolve(result.job_id);
           }
         }).then((jobId) => {
@@ -233,7 +257,7 @@ $("document").ready(function () {
 
   function renderAudio(jobId, current) {
     current.after(
-      '<audio  class="center w-1/2 margin-tb" controls preload="none" src="https://tts.qcri.org/api/audio/' +
+      '<audio autoplay  class="center w-1/2 margin-tb invisible" controls src="https://tts.qcri.org/api/audio/' +
         jobId +
         '.wav" >' +
         "</audio>"

@@ -47,6 +47,9 @@
 .hidden {
   display: none;
 }
+.invisible{
+    visibility: hidden;
+}
 
 .header {
   padding-top: 7em;
