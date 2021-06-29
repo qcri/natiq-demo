@@ -2,7 +2,7 @@ $("document").ready(function () {
   $("#split-btn").click(function (e) {
     e.preventDefault();
     let splittedArray = []
-    $('#diacritizedText').children().each( (index, element) => {
+    $('#diacritizedText').find("span").each( (index, element) => {
       splittedArray.push(element.innerText)
     })
       arrayOfText = addDotToString(splittedArray);
@@ -52,32 +52,11 @@ $("document").ready(function () {
 
 
   $(".speaker-btn").on("click", function (e) {
-    
-    // if (!$(this).hasClass("disable-speaker")) {
-    //   let current = $(this);
-    //   e.preventDefault();
-    //   let text = $(this).prev().val();
-    //   if(text != "")
-    //     jobId = submitTTSJob(text, current);
-    // }
-
       e.preventDefault();
       $(".ready-to-speak").each(function(index, element){
-        // console.log($(element).children('.split-text').innerText)
        line = $(element).children(".split-text").val() 
         jobId = submitTTSJob(line, $(element));
       })
-      // let current = $(this);
-      // let text = $(".splitted-text").val();
-      // // alert(text)
-      // if(text != ""){
-      //   arrayOfText = text.split("\n");
-      //   for(line of arrayOfText)
-      //     // console.log(line)  
-      //     jobId = submitTTSJob(line, current);
-      // }
-
-   
 
   });
 
@@ -105,61 +84,27 @@ $("document").ready(function () {
     // if( key == 8 || key == 46 )
     //    console.log("yeas")
  
-  $('#diacritizedText').children().each( (index, element) => {
+  $('#diacritizedText').find("span").each( (index, element) => {
     if($(element).is('br')){
       return
     }
+    // console.log($(element))
     count = countWords(element.innerText)
-    console.log(count)
+    // console.log(element.innerText, ' ', count)
      if(countWords(element.innerText) > 20){
+      //  console.log("more than 20")
        $(element).addClass('highlight')
         }else{
+      //  console.log("less than 20")
+
           $(element).removeClass('highlight')
           $(element).find("*").removeClass('highlight')
 
         }
- })
-  validateSplitText($(this).children(".highlight"))
- 
-//  if($(this).children(".highlight").length > 0 )
-//   disableButton($("#split-btn"))
-// else
-//   enableButton($("#split-btn"))
-    // let splitArray = text.split(/<div><span>/)
-    // console.log(splitArray)
-    // const modifiedSplitArray = splitArray.map(text => {  
-    //   console.log("before", text)
-    //   // text = stripHTMLTags(text)
-    //   console.log("after", text)
-    //   if(countWords(text) > 20){
-    //     console.log("yes",text, ' ' +countWords(text))
-    //      text = '<span class= "highlight">'+text+'</span>'
-    //   }else{
-    //     '<span>'+text+'</span>'
-    //   }
-    //   return text
-    // });
-    // $("#diacritizedText").html(modifiedSplitArray.join("<br/>"));
-    // if(this.value == ""){
-    //   disableButton($("#split-btn"));
-    // }else{
-    //   enableButton($("#split-btn"))
-    // }
+    })
+      validateSplitText($(this).children(".highlight"))
+
   });
-
-
-
-  // $(document).on('change keyup paste', '.splitted-text', function(e) { 
-  //   text = this.value;
-  //   if(countWords(text) <20)
-  //   {
-  //     $(this).removeClass('warning')
-  //     $(this).siblings('.speaker-btn').removeClass('disable-speaker')
-  //   }else{
-  //     $(this).addClass('warning')
-  //     $(this).siblings('.speaker-btn').addClass('disable-speaker')
-  //   }
-  // });
 
   function validateSplitText(element){
     if(element.length > 0 )
@@ -222,7 +167,7 @@ $("document").ready(function () {
     }
     let result = "";
     result =
-      // '<div class="processed-result">' +
+      // '<div   class="processed-result">' +
      ' <div id="diacritizedText" contenteditable="true" class="w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 font-small-custom rtl box-dimen processed-result">' +
      joined_split_text +
     //  '</div>'+
