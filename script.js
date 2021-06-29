@@ -78,11 +78,30 @@ $("document").ready(function () {
     }
   });
 
-  $(document).on('change keyup paste', '#diacritizedText', function(e) { 
-    // var key = e.which || e.which;
+function checkContentEdits(event){
+  console.log("yeees")
+  return true;
+}
 
-    // if( key == 8 || key == 46 )
-    //    console.log("yeas")
+  $(document).on('change keyup paste', '#diacritizedText', function(e) { 
+    e.stopPropagation();
+    var key = e.which || e.which;
+
+    if( key == 8 || key == 46 ){
+       $('#diacritizedText').find("span").each( (index, element) => {
+        // if(!$(element).is('br') && $(element).is('span') && !$(element).hasClass('inner-text')){
+        //   console.log("merge", $(element))
+        // }
+        if(!$(element).is('br') && $(element).is('span') && $(element).next().is('span')){
+          console.log("merge", $(element))
+          console.log($(element).text())
+          
+          $(element).append($(element).next().text()).end()
+          $(element).next().remove().end()
+        }
+       })
+       
+    }
  
   $('#diacritizedText').find("span").each( (index, element) => {
     if($(element).is('br')){
@@ -167,15 +186,9 @@ $("document").ready(function () {
     }
     let result = "";
     result =
-      // '<div   class="processed-result">' +
      ' <div id="diacritizedText" contenteditable="true" class="w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 font-small-custom rtl box-dimen processed-result">' +
      joined_split_text +
-    //  '</div>'+
-      // '<textarea id="diacritizedText" class="w-11/12 text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 box-dimen big-font" >' +
-      // joined_split_text +
-      // "</textarea>" +
       "</div>";
-    // enableButton($("#split-btn"))
     $("#diacritized-results").html(result);
   }
 
@@ -184,10 +197,10 @@ $("document").ready(function () {
     splitArray = text.split(/[،!.:؟]+/);
     const modifiedSplitArray = splitArray.map(text => {  
       if(countWords(text) > 20){
-        console.log("yes")
-        text = '<span class= "highlight">'+text+'</span>'
+        // console.log("yes")
+        text = '<span contenteditable="true" class= "inner-text highlight" >'+text+'</span>'
       }else{
-        text = '<span>'+text+'</span>'
+        text = '<span contenteditable="true" class="inner-text">'+text+'</span>'
       }
       return text;
     });
