@@ -107,18 +107,12 @@ function checkContentEdits(event){
     if($(element).is('br')){
       return
     }
-    // console.log($(element))
     count = countWords(element.innerText)
-    // console.log(element.innerText, ' ', count)
      if(countWords(element.innerText) > 20){
-      //  console.log("more than 20")
        $(element).addClass('highlight')
         }else{
-      //  console.log("less than 20")
-
           $(element).removeClass('highlight')
           $(element).find("*").removeClass('highlight')
-
         }
     })
       validateSplitText($(this).children(".highlight"))
@@ -197,7 +191,6 @@ function checkContentEdits(event){
     splitArray = text.split(/[،!.:؟]+/);
     const modifiedSplitArray = splitArray.map(text => {  
       if(countWords(text) > 20){
-        // console.log("yes")
         text = '<span contenteditable="true" class= "inner-text highlight" >'+text+'</span>'
       }else{
         text = '<span contenteditable="true" class="inner-text">'+text+'</span>'
