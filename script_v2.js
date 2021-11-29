@@ -1,55 +1,7 @@
 $("document").ready(function () {
-  // $("#split-btn").click(function (e) {
-  //   e.preventDefault();
-  //   let splittedArray = []
-  //   $('#diacritizedText').find("span").each( (index, element) => {
-  //     splittedArray.push(element.innerText)
-  //   })
-  //     arrayOfText = addDotToString(splittedArray);
-  //     exposeSplittedResult(arrayOfText);
-
-  // });
-
-
-  $("#diacritize_btn").click(function (e) {
-    e.preventDefault();
-    var text = $("#plainText").val();
-    toggleLoading($("#diacritized-results .loading-wrapper"))
-    if(text){
-      var api_key = "gVyMcgLnLNHduIisHh";
-      var settings = {
-        async: true,
-        crossDomain: true,
-        url: "https://farasa.qcri.org/webapi/diacritize/",
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-        method: "POST",
-        processData: false,
-        data: "text=" + text + "&api_key=" + api_key,
-      };
-  
-      $.ajax(settings).done(function (response) {
-        if (response) {
-          toggleLoading($("#diacritized-results .loading-wrapper"))
-          response_json = JSON.parse(response);
-          exposeResult(response_json.text);
-          validateSplitText($("#diacritizedText").children(".highlight"))
-        }
-      });
-    }{
-
-    }
-    
-  });
-  
-  $("#skip_diacritization_btn").click(function (e){
-    e.preventDefault();
-    var text = $("#plainText").val();
-    if(text){
-      exposeResult(text);
-      validateSplitText($("#diacritizedText").children(".highlight"))
-    }
-  })
-
+   default_text = "معركة اليرموك، وقعت بين المسلمين والروم (الإمبراطورية البيزنطية)، ويعتبرها بعض المؤرخين من أهم المعارك في تاريخ العالم لأنها كانت بداية أول موجة انتصارات للمسلمين خارج جزيرة العرب.  وآذنت لتقدم الإسلام السريع في بلاد الشام  .المعركة حدثت بعد وفاة الرسول محمد صلى الله عليه وسلم بأربع سنوات."
+   exposeResult(default_text)
+ 
 
   $(".speaker-btn").on("click", function (e) {
       e.preventDefault();
@@ -172,17 +124,17 @@ function checkContentEdits(event){
 
       }
     }
-    $("#splitted-diacritized-results").html(result);
+    $("#diacritized-results").html(result);
   }
 
   function countWords(text){
     return $.trim(text).split(' ').filter(function(v){return v!==''}).length
   }
 
-  function exposeResult(diacritized_text) {
+  function exposeResult(text) {
     let joined_split_text = ''
-    if(diacritized_text != ""){
-      joined_split_text = autoJoinSplitText(diacritized_text)
+    if(text != ""){
+      joined_split_text = autoJoinSplitText(text)
     }
     let result = "";
     result =
@@ -210,9 +162,9 @@ function checkContentEdits(event){
   function submitTTSJob(text, current) {
     toggleLoading(current.children(".loading-wrapper"));
     audio_gender= $('input[name=gender]:checked').val()
-    model_id = "2bb6bf73-304c-444d-8e68-5452b551fc55"; // by default it's female
+    model_id = "0637246f-a4d7-43da-a3ce-e690b40f7fd0"; 
     if(audio_gender == 'Male')
-      model_id =  "f47c0afa-21b1-4bf4-bad5-d34d6cb43b57";
+      model_id =  "0e304539-8e0b-4388-b6a5-aa720b418a7a";
 
     
     fetch("https://tts.qcri.org/api/submit_job", {
