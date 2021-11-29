@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+    <link href="style.css" rel="stylesheet" />
+    <link rel="icon" href="images/favicon.png"/>    
+    <title>Diacritization - Natiq demo</title>
+  </head>
+  <body> 
+
+  <!-- This is an example component -->
+ <div class="relative min-h-screen  flex flex-col items-center px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center"
+ style="background-image: url(https://images.unsplash.com/photo-1525302220185-c387a117886e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80);"
+	>
+
+  <div class="header">
+    <a href="https://tts.qcri.org/" target="_blank"><img src="images/Hodhod_WhiteDesign.svg" alt="Natiq logo" /></a>
+  </div>
+  <div class="absolute bg-black opacity inset-0 z-0"></div>
+  <div class="max-w-5xl w-full p-11 bg-white rounded-xl z-10 page1">
+		<div class="text-center">
+			<h2 class="mt-5 text-3xl font-bold text-gray-900">
+				Welcome to Diacritization and NatiQ Demo!
+			</h2>
+		</div>
+<div>
+	<div x-data="app()" x-cloak>
+		<div class="max-w-4xl mx-auto  py-2">
+			<div x-show.transition="step != 'complete'">	
+				<!-- Step Content -->
+				<div class="py-1">	
+					<div x-show.transition.in="step === 1">
+
+            <form class="mt-8 space-y-6" action="#" method="POST">
+              <div class="relative">
+                <label class="text-m font-bold text-gray-700 tracking-wide hint">Enter text to diacritize</label>
+                <textarea id="plainText" class="w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 font-small-custom rtl box-dimen" type="">معركة اليرموك، وقعت بين المسلمين والروم (الإمبراطورية البيزنطية)، ويعتبرها بعض المؤرخين من أهم المعارك في تاريخ العالم لأنها كانت بداية أول موجة انتصارات للمسلمين خارج جزيرة العرب.  وآذنت لتقدم الإسلام السريع في بلاد الشام  .المعركة حدثت بعد وفاة الرسول محمد صلى الله عليه وسلم بأربع سنوات.
+               </textarea>
+              </div>
+            
+            </form>
+            <!-- class="fixed bottom-0 left-0 right-0 py-5 shadow-md" -->
+            <div class="top-margin" x-show="step != 'complete'">
+              <div class="max-w-3xl mx-auto px-4">
+                <div class="flex big-row justify-between">
+                  <div class="w-1/2">
+                    <button
+                      id="skip_diacritization_btn"
+                      x-show="step < 3"
+                      @click="step++"
+                      class="w-34 fococus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border"
+                    >Skip</button>
+
+                  </div>
+                  <div class="w-1/2 text-right">
+                    <button
+                      id="diacritize_btn"
+                      x-show="step < 3"
+                      @click="step++"
+                      class="button-dimen  focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+                    >Diacritize</button>
+
+                  </div>
+           
+                </div>
+              </div>
+            </div>  
+
+            </div>
+          
+           
+					</div>
+
+					<div x-show.transition.in="step === 2">
+            <div class ="mt-8 space-y-6">
+            <label class="text-m font-bold text-gray-700 tracking-wide hint">Split the paragraph into lines, each line is no longer 20 words</label>
+            <div class="flex center-flex">
+
+              <!-- <label for="email" class="font-bold mb-1 text-gray-700 block">Audio</label> -->
+              <label
+                class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm mr-4">
+                <div class="text-teal-600 mr-3">
+                  <input name="gender" type="radio" x-model="gender" value="Male" class="form-radio focus:outline-none focus:shadow-outline" />
+                </div>
+                <div class="select-none text-gray-700">Male</div>
+              </label> 
+               <label
+                class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm">
+                <div class="text-teal-600 mr-3">
+                  <input name="gender" type="radio" x-model="gender" value="Female" class="form-radio focus:outline-none focus:shadow-outline" />
+                </div>
+                <div class="select-none text-gray-700">Female</div>
+              </label> 
+              <button value="speak" class="speaker-btn" x-show="step < 3"
+              @click="step++"></button>
+
+            </div>
+            <div id="diacritized-results">
+              <div class="center hidden loading-wrapper">  <span class="loading"></span></div>
+            </div>
+          </div>
+            <!-- <div class="top-margin" x-show="step != 'complete'">
+              <div class="max-w-3xl mx-auto px-4">
+                <div class="flex justify-between">
+                  <div class="w-1/2">
+                    <button
+                      x-show="step > 1"
+                      @click="step--"
+                      class="w-34 focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border previous" 
+                    >Previous</button>
+                  </div>
+
+                  <div class="w-1/2 text-right">
+                    <button
+                      id="split-btn"
+                      x-show="step < 3"
+                      @click="step++"
+                      class="button-dimen focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+                    >Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>  -->
+          </div>  
+				
+        
+          <div x-show.transition.in="step === 3">
+            <label class="text-m font-bold text-gray-700 tracking-wide hint">Please note that TTS API expects max 20 words per line.</label>
+           
+            <div class="mb-5">
+						
+							
+							<!-- <div class="flex center-flex"> -->
+
+                <!-- <label for="email" class="font-bold mb-1 text-gray-700 block">Audio</label> -->
+								<!-- <label
+									class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm mr-4">
+									<div class="text-teal-600 mr-3">
+										<input name="gender" type="radio" x-model="gender" value="Male" class="form-radio focus:outline-none focus:shadow-outline" />
+									</div>
+									<div class="select-none text-gray-700">Male</div>
+								</label> -->
+								<!-- <label
+									class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm">
+									<div class="text-teal-600 mr-3">
+										<input name="gender" type="radio" x-model="gender" value="Female" class="form-radio focus:outline-none focus:shadow-outline" />
+									</div>
+									<div class="select-none text-gray-700">Female</div>
+								</label> -->
+                <!-- <button value="speak" class="speaker-btn"></button> -->
+
+							<!--</div> -->
+						</div>
+            <div id="splitted-diacritized-results" class="processed-result"></div>
+
+            <div  class="top-margin" x-show="step != 'complete'">
+              <div class="max-w-3xl mx-auto px-4">
+                <div class="flex justify-between">
+                  <div class="w-1/2">
+                    <button
+                      x-show="step > 1"
+                      @click="step--"
+                      class="w-34 focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border previous" 
+                    >Previous</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+					</div>
+				</div>
+				<!-- / Step Content -->
+
+			</div>
+		</div>
+
+	
+		<!-- / Bottom Navigation https://placehold.co/300x300/e2e8f0/cccccc -->	
+	</div>
+</div>
+</div>
+</div>
+<script>
+  function app() {
+    return {
+      step: 1, 
+      gender: 'Female',
+    }
+  }
+</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script src="script_v2.js" type="text/javascript"></script>
+  </body>
+</html>
