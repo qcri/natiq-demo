@@ -204,9 +204,9 @@ function checkContentEdits(event){
   function submitTTSJob(text, current) {
     toggleLoading(current.children(".loading-wrapper"));
     audio_gender= $('input[name=gender]:checked').val()
-    model_id = "13ff0d6e-bf12-4035-a116-3456e304bda7"; // by default it's female
+    model_id = "0637246f-a4d7-43da-a3ce-e690b40f7fd0"; 
     if(audio_gender == 'Male')
-      model_id =  "b9dd62cc-c99c-44e8-898e-3efdb72396bb";
+      model_id =  "0e304539-8e0b-4388-b6a5-aa720b418a7a";
 
     
     fetch("https://tts.qcri.org/api/submit_job", {
@@ -218,6 +218,7 @@ function checkContentEdits(event){
         model_id: model_id,
         text: text,
         is_public: false,
+        diac: false  //override daiacritization on server side
       }),
     })
       .then(function (response) {
