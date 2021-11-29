@@ -6,11 +6,13 @@ $("document").ready(function () {
   $(".speaker-btn").on("click", function (e) {
       e.preventDefault();
       let splittedArray = []
-      $('#diacritizedText').find("span").each( (index, element) => {
-        splittedArray.push(element.innerText)
-      })
-      arrayOfText = addDotToString(splittedArray);
-      exposeSplittedResult(arrayOfText);
+      if(!$(".ready-to-speak")[0]){  //skip splitting if it was splitted before
+        $('#diacritized-results').find("span").each( (index, element) => {
+          splittedArray.push(element.innerText)
+        })
+        arrayOfText = addDotToString(splittedArray);
+        exposeSplittedResult(arrayOfText);
+      }
       $(".ready-to-speak").each(function(index, element){
        line = $(element).children(".split-text").val() 
         jobId = submitTTSJob(line, $(element));
@@ -36,62 +38,6 @@ $("document").ready(function () {
     }
   });
 
-function checkContentEdits(event){
-  console.log("yeees")
-  return true;
-}
-
-  $(document).on('change keyup paste', '#diacritizedText', function(e) { 
-    e.stopPropagation();
-    var key = e.which || e.which;
-
-    if( key == 8 || key == 46 ){
-       $('#diacritizedText').find("span").each( (index, element) => {
-        // if(!$(element).is('br') && $(element).is('span') && !$(element).hasClass('inner-text')){
-        //   console.log("merge", $(element))
-        // }
-        if(!$(element).is('br') && $(element).is('span') && $(element).next().is('span')){
-          console.log("merge", $(element))
-          console.log($(element).text())
-          
-          $(element).append($(element).next().text()).end()
-          $(element).next().remove().end()
-        }
-       })
-       
-    }
- 
-  $('#diacritizedText').find("span").each( (index, element) => {
-    if($(element).is('br')){
-      return
-    }
-    count = countWords(element.innerText)
-     if(countWords(element.innerText) > 20){
-       $(element).addClass('highlight')
-        }else{
-          $(element).removeClass('highlight')
-          $(element).find("*").removeClass('highlight')
-        }
-    })
-      validateSplitText($(this).children(".highlight"))
-
-  });
-
-  function validateSplitText(element){
-    if(element.length > 0 )
-      disableButton($("#split-btn"))
-    else
-      enableButton($("#split-btn"))
-  }
-
-  function disableButton(button){
-    button.prop('disabled', true);
-    button.addClass("disabled"); 
-  }
-  function enableButton(button){
-    button.prop('disabled', false);
-    button.removeClass("disabled"); 
-  }
 
   function addDotToString(textArray) {
     let newArray = [];
