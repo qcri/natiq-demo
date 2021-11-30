@@ -80,7 +80,7 @@ function addDotToString(textArray) {
   function submitTTSJob(text, current) {
     toggleLoading(current.children(".loading-wrapper"));
     audio_gender= $('input[name=gender]:checked').val()
-    model_id = "2b2de83b-bd22-4cc0-99cb-86b91cf581cb"; 
+    model_id = "46cc0d3b-d4c7-490c-a9c1-f290d8e8427c"; 
     if(audio_gender == 'Male')
       model_id =  "f40fd5e2-9280-45b3-b17d-f0e67e322d4e";
 
