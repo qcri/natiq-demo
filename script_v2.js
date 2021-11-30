@@ -5,6 +5,10 @@ $("document").ready(function () {
 
   $(".speaker-btn").on("click", function (e) {
       e.preventDefault();
+      if ($('#diacritized-results p').length > 0){  // check if user paste or delete default text and add new text, then we need to
+        let text = $('#diacritizedText').text() 
+        exposeResult(text)
+      }
       let splittedArray = []
       if(!$(".ready-to-speak")[0]){  //skip splitting if it was splitted before
         $('#diacritized-results').find("span").each( (index, element) => {
@@ -19,25 +23,16 @@ $("document").ready(function () {
       })
 
   });
-
+  
   function delay(t, v) {
     return new Promise(function (resolve) {
       setTimeout(resolve.bind(null, v), t);
     });
   }
-
-  $(document).on('change keyup paste', '#plainText', function(e) { 
-  
-    if(this.value == ""){
-      disableButton($("#diacritize_btn"));
-      disableButton($("#skip_diacritization_btn"));
-      
-    }else{
-      enableButton($("#diacritize_btn"))
-      enableButton($("#skip_diacritization_btn"))
-    }
+  $(document).on('keypress paste', '#diacritizedText', function(e) { 
+    text = $(this).text()
   });
-
+ 
 
   function addDotToString(textArray) {
     let newArray = [];
@@ -108,9 +103,9 @@ $("document").ready(function () {
   function submitTTSJob(text, current) {
     toggleLoading(current.children(".loading-wrapper"));
     audio_gender= $('input[name=gender]:checked').val()
-    model_id = "0637246f-a4d7-43da-a3ce-e690b40f7fd0"; 
+    model_id = "2b2de83b-bd22-4cc0-99cb-86b91cf581cb"; 
     if(audio_gender == 'Male')
-      model_id =  "0e304539-8e0b-4388-b6a5-aa720b418a7a";
+      model_id =  "f40fd5e2-9280-45b3-b17d-f0e67e322d4e";
 
     
     fetch("https://tts.qcri.org/api/submit_job", {
