@@ -5,7 +5,7 @@ $("document").ready(function () {
 
   $(".speaker-btn").on("click", function (e) {
       e.preventDefault();
-      if ($('#diacritized-results p').length > 0){  // check if user paste or delete default text and add new text, then we need to
+      if ($('.ready-to-speak').length == 0){  // check if user paste or delete default text and add new text, then we need to
         let text = $('#diacritizedText').text() 
         exposeResult(text)
       }
