@@ -1,7 +1,11 @@
 $("document").ready(function () {
    default_text = "معركة اليرموك، وقعت بين المسلمين والروم (الإمبراطورية البيزنطية)، ويعتبرها بعض المؤرخين من أهم المعارك في تاريخ العالم لأنها كانت بداية أول موجة انتصارات للمسلمين خارج جزيرة العرب.  وآذنت لتقدم الإسلام السريع في بلاد الشام  .المعركة حدثت بعد وفاة الرسول محمد صلى الله عليه وسلم بأربع سنوات."
-   exposeResult(default_text)
- 
+   result =
+   ' <div id="diacritizedText" contenteditable="true" class="w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 font-small-custom rtl box-dimen processed-result">' +
+   default_text +
+    "</div>";
+  $("#diacritized-results").html(result);
+  
 
   $(".speaker-btn").on("click", function (e) {
       e.preventDefault();
